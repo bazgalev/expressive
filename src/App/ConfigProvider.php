@@ -17,51 +17,25 @@ class ConfigProvider
      * method which returns an array with its configuration.
      *
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
         ];
     }
 
     /**
      * Returns the container dependencies
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
             'invokables' => [
                 Handler\PingHandler::class => Handler\PingHandler::class,
             ],
-            'factories'  => [
+            'factories' => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
-
-            ],
-//            'input_filters' => $this->getInputFilters(),
-        ];
-    }
-
-    /**
-     * Returns the templates configuration
-     */
-    public function getTemplates() : array
-    {
-        return [
-            'paths' => [
-                'app'    => ['templates/app'],
-                'error'  => ['templates/error'],
-                'layout' => ['templates/layout'],
             ],
         ];
     }
-
-//    private function getInputFilters()
-//    {
-//        return [
-//            'factories' => [
-//                QueryInputFilter::class => InvokableFactory::class,
-//            ],
-//        ];
-//    }
 }
