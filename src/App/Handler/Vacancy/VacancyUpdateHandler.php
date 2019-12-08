@@ -14,14 +14,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Diactoros\Response\JsonResponse;
 
-class VacancyUpdateHandler implements RequestHandlerInterface
+class VacancyUpdateHandler extends VacancyHandler
 {
-    protected $gateway;
-
-    public function __construct(VacanciesGateway $gateway)
-    {
-        $this->gateway = $gateway;
-    }
 
     /**
      * @param ServerRequestInterface $request
@@ -34,11 +28,11 @@ class VacancyUpdateHandler implements RequestHandlerInterface
         $body = $request->getParsedBody();
 
         /** @var ResultSet $rowSet */
-        $rowSet = $this->gateway->select(['id = ?' => $id]);
+        $rowSet = $this->vacanciesGateway->select(['id = ?' => $id]);
 
         /** @var Vacancy $user */
         $user = $rowSet->current();
-        $user = $user->update($body, $this->gateway);
+        $user = $user->update($body, $this->vacanciesGateway);
 
 
         return new JsonResponse($user->toArray(), 201);

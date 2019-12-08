@@ -4,22 +4,13 @@ declare(strict_types=1);
 
 namespace App\Handler\Vacancy;
 
-use Database\Gateways\VacanciesGateway;
 use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class VacancyDeleteHandler implements RequestHandlerInterface
+class VacancyDeleteHandler extends VacancyHandler
 {
-    protected $gateway;
-
-    public function __construct(VacanciesGateway $gateway)
-    {
-        $this->gateway = $gateway;
-    }
-
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
@@ -29,7 +20,7 @@ class VacancyDeleteHandler implements RequestHandlerInterface
     {
         $id = (int)$request->getAttribute('id');
 
-        $this->gateway->delete(['id = ?' => $id]);
+        $this->vacanciesGateway->delete(['id = ?' => $id]);
 
         return new JsonResponse($id, 204);
     }
