@@ -40,7 +40,7 @@ class ConfigProvider
                 'driver' => 'Pdo_Mysql',
                 'database' => 'expressive',
                 'username' => 'root',
-                'password' => '',
+                'password' => 'root',
                 'hostname' => 'localhost',
                 'port' => 3306,
                 'charset' => 'utf8'

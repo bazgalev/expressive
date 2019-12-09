@@ -13,6 +13,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Code\Exception\RuntimeException;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\InputFilter\InputFilter;
 
 abstract class FilterMiddleware implements MiddlewareInterface
@@ -35,7 +37,7 @@ abstract class FilterMiddleware implements MiddlewareInterface
         static::setData($request);
 
         if (!$this->filter->isValid()) {
-            throw new Exception(json_encode($this->filter->getMessages()), 422);
+            return new JsonResponse($this->filter->getMessages(), 422);
         }
         return $handler->handle($request);
     }

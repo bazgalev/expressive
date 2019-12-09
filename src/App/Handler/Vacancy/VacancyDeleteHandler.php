@@ -19,7 +19,6 @@ class VacancyDeleteHandler extends VacancyHandler
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $id = (int)$request->getAttribute('id');
-
         $this->vacanciesGateway->delete(['id = ?' => $id]);
 
         return new JsonResponse($id, 204);

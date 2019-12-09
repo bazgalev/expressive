@@ -31,10 +31,19 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Handler\PingHandler::class => Handler\PingHandler::class,
             ],
             'factories' => [
-                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Handler\Company\CompanyViewHandler::class => Handler\Company\CompanyViewHandlerFactory::class,
+                Handler\FilterMiddleware\Company\ViewCompanyFilterMiddleware::class => Handler\FilterMiddleware\Company\ViewCompanyFilterMiddlewareFactory::class,
+                Handler\FilterMiddleware\Vacancy\CreateFilterMiddleware::class => Handler\FilterMiddleware\Vacancy\CreateVacancyFilterFactory::class,
+                Handler\FilterMiddleware\Vacancy\ExistVacancyFilterMiddleware::class => Handler\FilterMiddleware\Vacancy\ExistVacancyFilterMiddlewareFactory::class,
+                Handler\FilterMiddleware\Vacancy\UpdateVacancyFilterMiddleware::class => Handler\FilterMiddleware\Vacancy\UpdateVacancyFilterMiddlewareFactory::class,
+                Handler\FilterMiddleware\Company\ViewCompanyFilterMiddleware::class => Handler\FilterMiddleware\Company\ViewCompanyFilterMiddlewareFactory::class,
+                Handler\Vacancy\VacancyCreateHandler::class => Handler\Vacancy\VacancyCreateHandlerFactory::class,
+                Handler\Vacancy\VacancyDeleteHandler::class => Handler\Vacancy\VacancyDeleteHandlerFactory::class,
+                Handler\Vacancy\VacancyIndexHandler::class => Handler\Vacancy\VacancyIndexHandlerFactory::class,
+                Handler\Vacancy\VacancyUpdateHandler::class => Handler\Vacancy\VacancyUpdateHandlerFactory::class,
+                Handler\Vacancy\VacancyViewHandler::class => Handler\Vacancy\VacancyViewHandlerFactory::class,
             ],
         ];
     }
